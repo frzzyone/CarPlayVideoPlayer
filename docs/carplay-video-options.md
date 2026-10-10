@@ -134,3 +134,42 @@ Conclusion: Netflix cannot be put on the T3 with software or an add-on box. The 
 routes are a second device that runs Netflix natively (a tablet with a mount, or a portable
 car screen that runs its own Android with Netflix preinstalled) or replacing the T3 with
 such a screen.
+
+## Addendum: Jellyfin and Plex on the CarpodGo T3 (October 2026)
+
+Without DRM the picture changes. Content from a personal media server can be mirrored or
+decoded on the phone and drawn on the car screen, which Netflix forbids.
+
+### iPhone route: CarTV Cast (App Store)
+
+- iPhone app, iOS 26.1 or later, any CarPlay head unit, wired or wireless. No car-side video
+  support needed, so it should work on the T3.
+- Native Jellyfin and Emby browsing, M3U/Xtream playlists, local files. Streams are decoded on
+  the iPhone and drawn in the CarPlay window over the CarPlay connection, no Wi-Fi needed.
+- Plex: no native source. Use Mirror (whole iPhone screen over the CarPlay connection, works
+  with every app) or Receive (CarTV appears as a UPnP/DLNA renderer to apps that can cast to
+  one, such as Infuse or VLC). Google Cast apps cannot see it.
+- Free tier: one source and a 15 minute casting limit per session, enough to test on the T3.
+  Pro is 5.99 USD per month or 14.99 USD once.
+- Risks: one review reported video breaking after an update with a "head unit does not
+  support AirPlay video playback" message, fixed in 1.1.2. The app draws video in a CarPlay
+  window in a way Apple's published guidelines do not describe for non-navigation apps, so it
+  may not survive App Review policy changes. Check which car and wired or wireless when
+  reporting problems, per the developer.
+
+### Android route (any spare Android phone, wireless Android Auto to the T3)
+
+- Xtream Player: sideloaded Android Auto app with Plex and Jellyfin support in its premium
+  tier, M3U, YouTube. Version 1.7.50 added Plex Live TV in September 2026.
+- Fermata Auto 2.0 (January 2026): no root, wired and wireless Android Auto, Android 13 to 16,
+  plays from SMB, SFTP and Google Drive shares. Plex only through its browser.
+- ScreenOnAuto: root-free screen mirroring into Android Auto, Shizuku optional. Non-DRM video
+  mirrors fine. On Android 14 and later install is via a Google Play internal test round
+  because sideloading is blocked. Phone screen must stay on unless Shizuku or root.
+- All need Android Auto developer settings with Unknown sources enabled.
+
+### Building a CarTV equivalent
+
+Not viable for personal use. Drawing video requires an entitlement that grants a CarPlay
+window, which Apple issues only after reviewing the app's stated purpose. Which entitlement
+CarTV holds could not be determined from public sources.
