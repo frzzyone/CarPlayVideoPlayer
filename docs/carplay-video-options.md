@@ -190,3 +190,22 @@ Carlinkit dongles plug into.
   firmware to advertise video-in-car to the iPhone still needs the capability reverse
   engineered from Apple's CarPlay Simulator, and ocbm does not implement the car-facing
   fake-iPhone half that the stock Carlinkit firmware does. Both halves would be new work.
+
+## Addendum: Carlinkit Mini Ultra 6 (October 2026)
+
+The Mini Ultra 6 is the commercial version of the "dongle that accepts AirPlay" idea. It is a
+4-in-1 adapter for cars with factory wired CarPlay: wireless CarPlay, wireless Android Auto,
+AirPlay mirroring from iPhone, and Miracast from Android. Allwinner V553 class SoC, dual-band
+Wi-Fi with a dedicated 5.8 GHz link, Bluetooth 5.4. Priced from about 31 USD on AliExpress to
+59 USD at Carlinkit's store and 59.90 EUR on Amazon.de. Released around August 2026.
+
+- The vendor wording is "one-tap AirPlay mirroring", so treat it as AirPlay screen mirroring.
+  Whether it also accepts AirPlay video casting from apps is unconfirmed.
+- Jellyfin and Plex: mirroring should work because the content has no DRM. Netflix: black
+  screen, as with every mirroring path.
+- Quality is unverified for this exact unit. CarPlayLife's test of a comparable 4-in-1
+  adapter measured about 226 ms audio-video offset with dropped frames on iPhone AirPlay
+  mirroring of YouTube, described as close to unwatchable, against about 86 ms on Android
+  Miracast. Output resolution is capped by the car's CarPlay stream.
+- Buy from a seller with returns and test with Jellyfin before committing. The step up in
+  quality is an Android AI box with Widevine L1.
