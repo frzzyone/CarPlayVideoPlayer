@@ -173,3 +173,20 @@ decoded on the phone and drawn on the car screen, which Netflix forbids.
 Not viable for personal use. Drawing video requires an entitlement that grants a CarPlay
 window, which Apple issues only after reviewing the app's stated purpose. Which entitlement
 CarTV holds could not be determined from public sources.
+
+## Addendum: the stock car screen has wired CarPlay and Android Auto (October 2026)
+
+This reopens every route the T3 closed, because wired CarPlay is what Android AI boxes and
+Carlinkit dongles plug into.
+
+- Buy: an Android AI box in the stock USB port runs Netflix, Jellyfin and Plex natively and
+  usually adds wireless CarPlay passthrough. For Netflix in HD pick a box with Widevine L1 and
+  a real Play Store; L3 boxes are limited to SD and Netflix has tightened enforcement.
+  Candidates: Carlinkit TBox Ultra (Snapdragon 6125, Android 13, full Play Store), Ottocast
+  P3 Pro (Snapdragon 6225, Android 13), Bruxe R7 Pro per CarPlayLife's 2026 ranking.
+- Free today: CarTV Cast on the iPhone over wired CarPlay for Jellyfin and Plex. An Android
+  phone over wired Android Auto with Xtream Player, Fermata Auto or ScreenOnAuto.
+- Build: a Carlinkit dongle in the stock port now has somewhere to send video. Modifying its
+  firmware to advertise video-in-car to the iPhone still needs the capability reverse
+  engineered from Apple's CarPlay Simulator, and ocbm does not implement the car-facing
+  fake-iPhone half that the stock Carlinkit firmware does. Both halves would be new work.
