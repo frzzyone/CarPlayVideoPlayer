@@ -110,3 +110,27 @@ existing CarPlay screen with no jailbreak and no automaker support.
 - 9to5Mac, CarPlay video in iOS 26: <https://9to5mac.com/2026/05/06/carplay-video-ios-26/>
 - CarPlayLife, 2026 adapter roundup: <https://www.carplaylife.com/feature/best-wireless-adapters-to-convert-wired-carplay-into-wireless-android-auto-in-2026/>
 - react-carplay / node-carplay: <https://github.com/rhysmorgan134/react-carplay>
+
+## Addendum: CarpodGo T3 and Netflix (October 2026)
+
+Target hardware turned out to be a CarpodGo T3 portable display. Findings:
+
+- The T3 accepts only wireless CarPlay and wireless Android Auto. Its USB-C ports are for
+  power and firmware. It has no HDMI input and no wired CarPlay port. CarpodGo's FAQ says
+  it cannot run apps.
+- Netflix does not support AirPlay or screen mirroring on iPhone. Netflix's help pages say
+  so, and the symptom is a black screen with sound. An AirPlay receiver of any quality, DIY
+  or commercial, therefore cannot deliver Netflix.
+- Android AI boxes that run Netflix natively all require a wired CarPlay USB port. No box
+  was found that connects wirelessly to a head unit. The T3 cannot host one.
+- Android Auto mirroring apps (Screen2Auto, ScreenOnAuto) cannot show Netflix because the
+  app marks its surface secure and Android refuses to capture it. Root-based bypasses are
+  old and unconfirmed.
+- Emulating a wireless CarPlay iPhone toward the T3 has no open-source starting point. Every
+  open project is the receiver direction. It would be a months-long reverse engineering
+  effort and would still need a Netflix-capable device behind it.
+
+Conclusion: Netflix cannot be put on the T3 with software or an add-on box. The practical
+routes are a second device that runs Netflix natively (a tablet with a mount, or a portable
+car screen that runs its own Android with Netflix preinstalled) or replacing the T3 with
+such a screen.
