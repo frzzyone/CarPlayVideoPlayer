@@ -1,0 +1,43 @@
+schema: spec-driven
+
+# Project context: constraints that should guide OpenSpec artifacts.
+# See docs/carplay-video-options.md for the research behind these.
+context: |
+  This project is an iOS CarPlay video app targeting iOS 27 or later.
+  Follow the official Apple route only: the com.apple.developer.carplay-video
+  entitlement combined with com.apple.developer.carplay-audio so the app also
+  appears in cars without video support. No navigation-entitlement or
+  jailbreak workarounds.
+  Video playback goes over AirPlay video to the head unit; the app never draws
+  video frames onto the CarPlay screen itself. The CarPlay UI is built from
+  CarPlay framework templates only.
+  Check CPSessionConfiguration.supportsVideoPlayback and degrade to audio-first
+  content when false. The system enforces parked-only playback; do not add a
+  custom gear or motion lock.
+  Attach CPPlaybackConfiguration to list thumbnails and details headers and
+  keep it updated on every playback state change.
+  Language: Swift. Minimum deployment target: iOS 27.
+  Testing without a supporting car uses the Apple CarPlay Simulator from
+  Additional Tools for Xcode with its video-capable vehicle configuration.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
