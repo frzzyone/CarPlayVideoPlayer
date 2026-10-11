@@ -93,3 +93,58 @@ RISC-V dongle imposes.
 - https://github.com/ludwig-v/wireless-carplay-dongle-reverse-engineering
 - https://github.com/fdh2/uxplay
 - https://www.carlinkit.com/faq_firmware_update_issue.html
+
+## 7. Owner's unit: classification (2026-10-11)
+
+Capture: `re/captures/2026-10-11-mini-ultra-3-getversion.txt`.
+
+| Field | Value | Meaning |
+|---|---|---|
+| `index.cgi?id=host` | 404 | not the `cpbox-abroad` (Liaoyuan) firmware, so not the V821B/AX520 path LIVI Link and catplay V821 use |
+| `product_Model` | `v851se-yunlian-cp` | the yunlian firmware template; reported on Anyka and Ingenic boards alike, so it does not name the chip |
+| `custom` | `suding` | yunlian family build tag (others: `yunlian`, `yunlian-VehiConn`) |
+| `platform` | `AX1800M` | Carlinkit's ID for the Ingenic X1600EN board with 16 MiB SPI NOR. The same firmware on Anyka boards reports `AK3918AN`, so this field does track the board |
+| `system_version` | `202603120956CA` | March 2026 build |
+
+Working classification: **variant C firmware (yunlian/suding) on what is probably the Ingenic
+X1600EN NOR board**. That is the best outcome within variant C:
+
+- catplay's most mature firmware (`clk-mini-ultra-nor`) targets exactly AX1800M hardware,
+  X1600EN + AIC8800D80 + 16 MiB NOR. Whether this PCB matches the Wooboobox M11 layout that
+  image was built for is unknown until the case is open.
+- Its stock-firmware entry path does not apply here: it needs the Wooboobox or cpbox web
+  interface, and this firmware has neither. The AX1800 (non-M) report in catplay-firmware
+  issue 19 is a NAND board and needs separate work; ours reports NOR.
+- Ingenic SoCs have a boot-ROM USB boot mode that survives any flash corruption. Entry on
+  NOR boards is by holding the flash chip's pins 5 and 6 shorted while plugging in, per the
+  thingino wiki, after which the SoC enumerates as an Ingenic USB boot device. Host tools:
+  thingino-dfu or the web flasher to dump and write the NOR, or catplay's wizard in
+  `--already-fel` mode once we know the image fits. This makes a full dump possible without
+  any software foothold, and makes a bad flash recoverable.
+
+Caveat: the platform string has not been verified against chip markings on this unit. Open
+the case and read the SoC, radio, flash and MFi chip before relying on it.
+
+### Next physical steps
+
+1. Open the case. Photograph both PCB sides. Record markings on the SoC (expect `X1600E`),
+   the radio module (expect AIC8800D80), the 8-pin SPI NOR (part number gives size), and the
+   MFi chip. Note any labelled test pads (UART TX/RX/GND, BOOT).
+2. If the SoC is Ingenic X1600: enter USB boot mode by the pin 5 and 6 short, confirm an
+   Ingenic USB boot device appears, and take a full NOR dump with thingino-dfu. Verify the dump
+   by taking it twice and comparing hashes. Keep both copies off the repo.
+3. Run `fw-inspect` on the dump. Expected: U-Boot, kernel, squashfs or UBI-less NOR layout,
+   the lighttpd web UI with `getversion.cgi`, the yunlian CarPlay stack binaries, a
+   persistent partition holding the MFi identity.
+4. Open a report on catplay-firmware with the capture and photos. The maintainer has asked
+   for exactly this on other variants, and an X1600 NOR board running yunlian firmware is
+   new information for the project.
+5. Only then decide between: a catplay X1600 image (if the board matches, with the
+   maintainer's confirmation), or our own build.
+
+If the SoC turns out to be Anyka AK3918: catplay's Anyka port is in progress with no ETA;
+wait, or trade for a V821B unit. If it is Allwinner V821B: the LIVI Link and catplay V821
+paths apply after all, and the 404 was a firmware difference, not a hardware one.
+
+Additional sources: https://github.com/themactep/thingino-firmware/wiki/USB-Boot-Mode,
+https://github.com/catplay-labs/catplay-firmware/issues/2, /issues/14, /issues/19.
