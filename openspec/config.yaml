@@ -1,24 +1,24 @@
 schema: spec-driven
 
 # Project context: constraints that should guide OpenSpec artifacts.
-# See docs/carplay-video-options.md for the research behind these.
+# Research: docs/carplay-video-options.md and docs/re/mini-ultra-3.md
 context: |
-  This project is an iOS CarPlay video app targeting iOS 27 or later.
-  Follow the official Apple route only: the com.apple.developer.carplay-video
-  entitlement combined with com.apple.developer.carplay-audio so the app also
-  appears in cars without video support. No navigation-entitlement or
-  jailbreak workarounds.
-  Video playback goes over AirPlay video to the head unit; the app never draws
-  video frames onto the CarPlay screen itself. The CarPlay UI is built from
-  CarPlay framework templates only.
-  Check CPSessionConfiguration.supportsVideoPlayback and degrade to audio-first
-  content when false. The system enforces parked-only playback; do not add a
-  custom gear or motion lock.
-  Attach CPPlaybackConfiguration to list thumbnails and details headers and
-  keep it updated on every playback state change.
-  Language: Swift. Minimum deployment target: iOS 27.
-  Testing without a supporting car uses the Apple CarPlay Simulator from
-  Additional Tools for Xcode with its video-capable vehicle configuration.
+  This project reverse engineers a Carlinkit Mini Ultra 3 wireless CarPlay dongle that the
+  owner has physical possession of, so it can run open firmware that accepts AirPlay
+  mirroring from an iPhone and forwards the picture to the car over the dongle's wired
+  CarPlay output. The car has a factory wired CarPlay port.
+  Everything we write must be read-only toward the device unless a task explicitly says it
+  writes, and every write path must be preceded by a verified full flash backup kept off the
+  device. Never ship a step that cannot be reversed from that backup.
+  The dongle hardware varies by unit (Allwinner V821B, Axera AX520, Anyka or V851SE). Tools
+  must identify the variant first and refuse to proceed on an unsupported one.
+  Build on existing open projects where they exist: catplay (Rust CarPlay rx and tx gadgets),
+  LIVI Link (provisioning, backup, rescue), ocbm, UxPlay. Do not re-implement what they
+  provide; wrap, document or extend.
+  Host tooling is Python 3 and runs on Linux or macOS. This cloud session has no USB or
+  hardware access, so hardware verification steps are performed by the owner and recorded.
+  Netflix is out of scope for good (no AirPlay, DRM). Targets are Jellyfin, Plex and other
+  non-DRM sources. Parked use only.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
