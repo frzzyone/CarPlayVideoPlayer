@@ -1,0 +1,35 @@
+# Capture: owner's Carlinkit Mini Ultra 3, stock firmware, 2026-10-11
+# Method: joined dongle hotspot, HTTP GET from a browser. Read-only.
+#
+# GET http://192.168.50.100/cgi-bin/index.cgi?id=host  -> 404
+# Web UI header: "Hardware Version 202603120956CA", "Software version number 20260109175612"
+#
+# GET http://192.168.50.100/cgi-bin/getversion.cgi
+Content-Type: text/html
+
+system_version:202603120956CA
+
+protocol_version:20260109175612
+get_delay_timer:0
+get_wifi_channel:48
+get_manufacturer:
+Failed to read manufacturer
+get_model:
+Failed to read model
+get_srcVersion:
+Failed to read srcVersion
+get_showui:1
+get_cargps:0
+audioLatency:1000
+autoDisplay:1
+get_audiorate:
+Failed to read audioRate
+uuid:REDACTED
+product_Model:v851se-yunlian-cp
+get_ledmode:
+Failed to read ledmode
+isActivate:1
+bluetoothPhoneMode:0
+custom:suding
+
+platform:AX1800M
